@@ -1,50 +1,24 @@
-
-public class Casillero implements Cloneable{
-	private String tipoDeTerreno;
-	private int cantDeCoronas;
-	private Posicion pos;
+public class Casillero {
 	
-	Casillero(String tipoDeTerreno, int cantDeCoronas, Posicion pos){
-		this.cantDeCoronas=cantDeCoronas;
-		this.tipoDeTerreno= tipoDeTerreno;
-		this.pos=pos;
+	private String tipoTerreno;
+	private int cantCoronas;
+	private Posicion posicion;
+	
+	public Casillero(){
+		
 	}
-	Casillero(String tipoDeTerreno, int cantDeCoronas){
-		this.cantDeCoronas=cantDeCoronas;
-		this.tipoDeTerreno= tipoDeTerreno;
-		pos= new Posicion(0,0);
-	}
-
-	public String getTipoDeTerreno() {
-		return tipoDeTerreno;
+	public Casillero(String tipoTerreno, int cantCoronas, Posicion posicion) {
+		this.tipoTerreno = tipoTerreno;
+		this.cantCoronas = cantCoronas;
+		this.posicion = posicion;
 	}
 
-	public int getCantDeCoronas() {
-		return cantDeCoronas;
+	public boolean sonConsecutivos(Casillero c) {
+		return true;
 	}
-
-	public Posicion getPos() {
-		return pos;
-	}
-
-	public void setTipoDeTerreno(String tipoDeTerreno) {
-		this.tipoDeTerreno = tipoDeTerreno;
-	}
-
-	public void setCantDeCoronas(int cantDeCoronas) {
-		this.cantDeCoronas = cantDeCoronas;
-	}
-
-	public void setPos(Posicion pos) {
-		this.pos = pos;
-	}
-
+	
 	@Override
-	protected Casillero clone() throws CloneNotSupportedException {		
-		return new Casillero(this.tipoDeTerreno,this.cantDeCoronas,this.getPos().clone());
+	public String toString() {
+		return "TTer: " +tipoTerreno+" Ccor: " +cantCoronas +" Pos: " + posicion;
 	}
-
-
-
 }
-

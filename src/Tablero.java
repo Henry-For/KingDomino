@@ -1,14 +1,13 @@
-import java.util.LinkedList;
-import java.util.List;
-
 public class Tablero {
-	List<Ficha> lista = new LinkedList<Ficha>();
-	public Tablero() {
+	
+	private Tablero[][] tablero;
+	
+	public int calcularPuntaje() {
+		return 1;
+	}
+	
+	public void posicionarFicha(Ficha f) {
 		
 	}
-	public boolean puedoUbicar(int x, int y) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 }
