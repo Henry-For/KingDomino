@@ -11,4 +11,5 @@ public class Posicion {
 		return " X : "+ x + " Y : " + y ;
 	}
 
+
 }

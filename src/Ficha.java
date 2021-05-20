@@ -8,6 +8,10 @@ public class Ficha {
 		this.casilleros = casilleros;
 	}
 
+	public Ficha() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public boolean sonConsecutivas(Ficha f) {
 		return true;
 	}

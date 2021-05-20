@@ -19,7 +19,6 @@ public class Archivo {
 			Mazo mazo = new Mazo();
 			Ficha ficha;
 			
-			
 			while(sc.hasNext()) {
 				
 				String linea = sc.nextLine();
@@ -33,13 +32,12 @@ public class Archivo {
 				
 				Casillero [] casilleros = {casillero, casillero2};
 				
-				
 				ficha = new Ficha(Integer.valueOf(valoresLinea[0]), casilleros);
 				mazo.agregarFicha(ficha);	
 			}
+			
 			sc.close();
 			return mazo;
-		
 			
 		} catch (Exception e) {
 			return null;

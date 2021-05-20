@@ -1,21 +1,24 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Mazo {
+public class Mazo implements Cloneable {
 	
 	private static final int CARTAS_A_ENTREGAR = 4;
 	private ArrayList<Ficha> fichas = new ArrayList<Ficha>(48);
 	private int indice= 0;
 
 	public Mazo() {
-		
+	}
+	
+	public Mazo(ArrayList<Ficha> fichas) {
+		this.fichas = fichas;
 	}
 	
 	public void agregarFicha(Ficha f){
 		this.fichas.add(f);
 	}
 
-	private static void mezclarMazo() {	
+	public void mezclarMazo() {	
 	}
 	// cambiar retorno
 	public List<Ficha> devolverFichas() {
@@ -25,6 +28,12 @@ public class Mazo {
 	@Override
 	public String toString() {
 		return "Mazo : "+ fichas;
+	}
+
+	@Override
+	protected Mazo clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return new Mazo(this.fichas);
 	}
 }
 

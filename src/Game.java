@@ -6,8 +6,15 @@ public class Game {
 	private PilaDeRobo pilaDeRoboActual;
 	private PilaDeRobo pilaDeRoboSiguiente;
 	private int cantidadDeJugadores;
+	private Mazo mazo;
 	
-	
+	public Game(Jugador[] jugadores, int cantidadDeJugadores, Mazo mazo) {
+		this.jugadores = jugadores;
+		this.cantidadDeJugadores = cantidadDeJugadores;
+		mazo.mezclarMazo();
+		this.mazo = mazo;
+	}
+
 	public void ejecutarJuego() {
 		
 	}
@@ -18,6 +25,5 @@ public class Game {
 	
 	public Jugador[] obtenerGanadores() {
 		return jugadores;
-		
 	}
 }
