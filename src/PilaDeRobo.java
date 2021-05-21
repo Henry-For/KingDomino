@@ -11,7 +11,7 @@ public class PilaDeRobo {
 	
 	public void asignarFicha(Ficha f, Jugador j) {
 			
-		}
+	}
 	
 	public void mostrarFichas() {
 		

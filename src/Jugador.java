@@ -13,15 +13,9 @@ public class Jugador {
 	}
 	
 	public void obtenerPuntaje() {
-		
 	}
-	
-//if(this.tablero.puedoUbicar(x,y)) {
-//	tablero.lista.add(ficha);
-//}
-//ficha.setPosicionFicha(x, y);
-//
-//System.out.println("Ficha que ubico en la posicion: ( " + x + " ; " + y + " ) del tablero ");
-//System.out.println(ficha); 
-}
 
+	public static void mezclarJugadores(Jugador[] jugadores) {
+		// tarea Tomi
+	}
+}
