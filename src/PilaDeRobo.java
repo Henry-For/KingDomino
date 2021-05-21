@@ -5,9 +5,13 @@ public class PilaDeRobo {
 	
 	private TreeMap<Ficha, Jugador> fichasRonda;
 	
+	public PilaDeRobo() {
+		fichasRonda = new TreeMap<Ficha, Jugador>();
+	}
+		
 	public void almacenarFichas(List<Ficha> f) {
 		for (Ficha ficha : f) {
-			fichasRonda.put(ficha,null);
+			fichasRonda.put(ficha, null);
 		}
 	}
 	
@@ -16,6 +20,9 @@ public class PilaDeRobo {
 	}
 	
 	public void mostrarFichas() {
+		for (Ficha ficha : fichasRonda.keySet()) {
+			System.out.println(ficha);
+		}
 	}
 
 	public TreeMap<Ficha, Jugador> getFichasRonda() {

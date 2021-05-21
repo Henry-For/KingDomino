@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class Mazo implements Cloneable {
 	private static final int CARTAS_A_ENTREGAR = 4;
@@ -17,9 +19,10 @@ public class Mazo implements Cloneable {
 		this.fichas.add(f);
 	}
 
-	public void mezclarMazo() {	
+	public void mezclarMazo() {
+		Collections.shuffle(fichas, new Random());
 	}
-	// cambiar retorno
+	
 	public List<Ficha> devolverFichas() {
 		return fichas.subList(indice, indice += CARTAS_A_ENTREGAR);
 	}
@@ -29,5 +32,3 @@ public class Mazo implements Cloneable {
 		return "Mazo : "+ fichas;
 	}
 }
-
-// No pude pensar el mazo como algo estatico, instanciaria uno en Game y fue.
