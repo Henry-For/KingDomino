@@ -8,7 +8,5 @@ public class Tablero {
 	
 	public boolean posicionarFicha(Ficha f) {
 		return false;
-		
 	}
-	
 }

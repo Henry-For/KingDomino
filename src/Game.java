@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Map.Entry;
 
 public class Game {
 	
@@ -6,12 +7,12 @@ public class Game {
 	private final static int CANT_RONDAS = 12;
 	private PilaDeRobo pilaDeRoboActual;
 	private PilaDeRobo pilaDeRoboSiguiente;
-	private int cantidadDeJugadores;
+	private int cantJugadores;
 	private Mazo mazo;
 	
 	public Game(ArrayList<Jugador> jugadores, Mazo mazo) {
 		this.jugadores = jugadores;
-		this.cantidadDeJugadores = cantidadDeJugadores;
+		this.cantJugadores= jugadores.size();
 		this.mazo = mazo;
 	}
 
@@ -25,14 +26,27 @@ public class Game {
 	}
 	
 	public void ejecutarPrimerRonda() {
+		pilaDeRoboActual.almacenarFichas(mazo.devolverFichas());
+		
 		for (Jugador jugador : jugadores) {
 			Ficha fichaElegida= jugador.seleccionarFicha(pilaDeRoboActual);
 			pilaDeRoboActual.asignarFicha(fichaElegida, jugador);
 		}
+		
+		pilaDeRoboSiguiente.almacenarFichas(mazo.devolverFichas());
+		
+		for (Entry<Ficha, Jugador> set : pilaDeRoboActual.getFichasRonda().entrySet()) {
+			Jugador jugador = set.getValue();
+			if(jugador != null) {
+				jugador.elegirPosicionFicha(set.getKey());
+				
+			}
+			
+		}
 	}
 	
 	public void ejecutarRonda() {
-		pilaDeRoboActual.almacenarFichas(mazo.devolverFichas());
+		
 	}
 	
 	public void obtenerGanadores() {

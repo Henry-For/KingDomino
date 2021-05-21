@@ -12,11 +12,13 @@ public class PilaDeRobo {
 	}
 	
 	public void asignarFicha(Ficha f, Jugador j) {
-	this.fichasRonda.put(this.fichasRonda.ceilingKey(f), j);
+		this.fichasRonda.put(this.fichasRonda.ceilingKey(f), j);
 	}
 	
 	public void mostrarFichas() {
-	
 	}
-		
+
+	public TreeMap<Ficha, Jugador> getFichasRonda() {
+		return fichasRonda;
+	}	
 }
