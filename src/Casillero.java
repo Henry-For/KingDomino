@@ -7,6 +7,7 @@ public class Casillero {
 	public Casillero(){
 		
 	}
+	
 	public Casillero(String tipoTerreno, int cantCoronas, Posicion posicion) {
 		this.tipoTerreno = tipoTerreno;
 		this.cantCoronas = cantCoronas;
@@ -20,5 +21,13 @@ public class Casillero {
 	@Override
 	public String toString() {
 		return "TTer: " +tipoTerreno+" Ccor: " +cantCoronas +" Pos: " + posicion;
+	}
+	
+	public Posicion getPosicion() {
+		return posicion;
+	}
+	
+	public void setPosicion(Posicion posicion) {
+		this.posicion = posicion;
 	}
 }

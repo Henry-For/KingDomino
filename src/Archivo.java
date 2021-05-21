@@ -24,8 +24,8 @@ public class Archivo {
 				String linea = sc.nextLine();
 				String valoresLinea[] = linea.split(" ");
 				
-				Posicion pos = new Posicion();
-				Posicion pos2 = new Posicion();
+				Posicion pos = null;
+				Posicion pos2 = null;
 				
 				Casillero casillero = new Casillero(valoresLinea[1], Integer.valueOf(valoresLinea[2]), pos);
 				Casillero casillero2 = new Casillero(valoresLinea[3], Integer.valueOf(valoresLinea[4]), pos2);
