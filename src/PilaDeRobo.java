@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 
 public class PilaDeRobo {
 	
@@ -15,8 +16,15 @@ public class PilaDeRobo {
 		}
 	}
 	
-	public void asignarFicha(Ficha f, Jugador j) {
-		this.fichasRonda.put(this.fichasRonda.ceilingKey(f), j);
+	public boolean asignarFicha(Ficha f, Jugador j) {
+		if(this.fichasRonda.get(f) != null)
+		{
+			System.out.println("Ficha ocupada");
+			return false;
+		}
+		
+		this.fichasRonda.put(this.fichasRonda.ceilingKey(f), j); // preguntar uso de ceilingkey
+		return true;
 	}
 	
 	public void mostrarFichas() {
@@ -28,4 +36,13 @@ public class PilaDeRobo {
 	public TreeMap<Ficha, Jugador> getFichasRonda() {
 		return fichasRonda;
 	}	
+	
+	public void mostrarOrdenJugadores()
+	{
+		System.out.println("Los jugadores tienen el siguiente orden:");
+		for (Entry<Ficha, Jugador> set : this.fichasRonda.entrySet()) {
+			if(set.getValue() != null)
+				System.out.println("- " + set.getValue().getNickName());
+		}
+	}
 }

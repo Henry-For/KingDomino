@@ -21,7 +21,9 @@ public class Game {
 		ejecutarPrimerRonda();
 	
 		for (int i=0; i<CANT_RONDAS; i++) {
+			System.out.println("Ronda " + (i+1) + "\nLos jugadores posicionan fichas");
 			this.ejecutarRonda();
+			System.out.println("---------------------------------------------\n");
 			this.pilaDeRoboActual= this.pilaDeRoboSiguiente;
 		}
 		this.obtenerGanadores();
@@ -35,8 +37,11 @@ public class Game {
 		Jugador.mezclarJugadores(jugadores);
 		
 		for (Jugador jugador : jugadores) {
-			Ficha fichaElegida= jugador.seleccionarFicha(pilaDeRoboActual);
-			pilaDeRoboActual.asignarFicha(fichaElegida, jugador);
+			Ficha fichaElegida;
+			do
+			{
+				fichaElegida= jugador.seleccionarFicha(pilaDeRoboActual);			
+			}while(pilaDeRoboActual.asignarFicha(fichaElegida, jugador) == false);
 		}
 	}
 	
@@ -45,12 +50,26 @@ public class Game {
 		this.pilaDeRoboSiguiente = new PilaDeRobo();
 		pilaDeRoboSiguiente.almacenarFichas(mazo.devolverFichas());
 		
+		this.pilaDeRoboActual.mostrarOrdenJugadores();
+		
 		for (Entry<Ficha, Jugador> set : pilaDeRoboActual.getFichasRonda().entrySet()) {
 			Jugador jugador = set.getValue();
 			if(jugador != null) {
-				jugador.elegirPosicionFicha(set.getKey());	
-				Ficha fichaElegida= jugador.seleccionarFicha(pilaDeRoboSiguiente);
-				pilaDeRoboSiguiente.asignarFicha(fichaElegida, jugador);
+				if(jugador.elegirPosicionFicha(set.getKey()))
+				{
+					System.out.println(jugador.getNickName() + " ficha insertada");
+				}
+				else
+				{
+					System.out.println(jugador.getNickName() + " ficha no insertada");
+				}
+				Ficha fichaElegida;
+				do
+				{
+					fichaElegida = jugador.seleccionarFicha(pilaDeRoboSiguiente);					
+				}while(pilaDeRoboSiguiente.asignarFicha(fichaElegida, jugador) == false);
+				
+				//System.out.println(fichaElegida);
 			}
 		}
 	}
