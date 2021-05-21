@@ -1,20 +1,22 @@
+import java.util.ArrayList;
+
 public class Game {
 	
-	private Jugador[] jugadores;
+	private ArrayList<Jugador> jugadores;
 	private final static int CANT_RONDAS = 12;
 	private PilaDeRobo pilaDeRoboActual;
 	private PilaDeRobo pilaDeRoboSiguiente;
 	private int cantidadDeJugadores;
 	private Mazo mazo;
 	
-	public Game(Jugador[] jugadores, int cantidadDeJugadores, Mazo mazo) {
+	public Game(ArrayList<Jugador> jugadores, Mazo mazo) {
 		this.jugadores = jugadores;
 		this.cantidadDeJugadores = cantidadDeJugadores;
 		this.mazo = mazo;
 	}
 
 	public void ejecutarJuego() {
-		Jugador.mezclarJugadores(jugadores);
+		Jugador.mezclarJugadores(jugadores); // preguntar a quien le corresponderia la responsabilidad
 		mazo.mezclarMazo();
 		for (int i=0; i<CANT_RONDAS; i++) {
 			this.ejecutarRonda();
@@ -24,19 +26,16 @@ public class Game {
 	
 	public void ejecutarPrimerRonda() {
 		for (Jugador jugador : jugadores) {
-			Ficha f= jugador.seleccionarFicha(pilaDeRoboActual);
-			pilaDeRoboActual.asignarFicha(f, jugador);
+			Ficha fichaElegida= jugador.seleccionarFicha(pilaDeRoboActual);
+			pilaDeRoboActual.asignarFicha(fichaElegida, jugador);
 		}
-		
 	}
 	
-
 	public void ejecutarRonda() {
-		pilaDeRoboActual.obtenerFichas(mazo.devolverFichas());
-		
+		pilaDeRoboActual.almacenarFichas(mazo.devolverFichas());
 	}
 	
-	public Jugador[] obtenerGanadores() {
-		return jugadores;
+	public void obtenerGanadores() {
+		Jugador.ordenarJugadoresPuntaje(jugadores);
 	}
 }

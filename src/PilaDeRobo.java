@@ -3,9 +3,9 @@ import java.util.TreeMap;
 
 public class PilaDeRobo {
 	
-	public TreeMap<Ficha, Jugador> fichasRonda;
+	private TreeMap<Ficha, Jugador> fichasRonda;
 	
-	public void obtenerFichas(List<Ficha> f) {
+	public void almacenarFichas(List<Ficha> f) {
 		
 	}
 	
@@ -14,7 +14,7 @@ public class PilaDeRobo {
 	}
 	
 	public void mostrarFichas() {
-		
+	
 	}
 		
 }

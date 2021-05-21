@@ -1,12 +1,13 @@
 public class Tablero {
 	
-	private Tablero[][] tablero;
+	private Casillero[][] tablero;
 	
 	public int calcularPuntaje() {
 		return 1;
 	}
 	
-	public void posicionarFicha(Ficha f) {
+	public boolean posicionarFicha(Ficha f) {
+		return false;
 		
 	}
 	
