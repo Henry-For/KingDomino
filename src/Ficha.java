@@ -1,4 +1,4 @@
-public class Ficha {
+public class Ficha implements Comparable<Ficha>{
 	
 	private int valorFicha;
 	private Casillero[] casilleros = new Casillero[2];
@@ -21,12 +21,21 @@ public class Ficha {
 		return true;
 	}
 	
-	@Override
-	public String toString() {
-		return "\nVF : "+ valorFicha+ "\t C1 : "+ casilleros[0] +" C2 : "+casilleros[1];
-	}
+    @Override
+    public String toString() {
+        return "\nFicha: " + valorFicha + ("\n---------------------------------")
+                + ("\n|" + casilleros[0].getCantCoronas() + "\t\t|" + casilleros[1].getCantCoronas() + "\t\t|")
+                + ("\n|" + casilleros[0].getTipoTerreno() + "\t\t|" + casilleros[0].getTipoTerreno() + "\t\t|")
+                + ("\n|" + casilleros[0].getPosicion() + "\t\t|" + casilleros[1].getPosicion() + "\t\t|")
+                + ("\n---------------------------------");
+    }
 	
 	public Casillero[] getCasilleros() {
 		return casilleros;
+	}
+
+	@Override
+	public int compareTo(Ficha o) {
+		return this.valorFicha - o.valorFicha;
 	}
 }

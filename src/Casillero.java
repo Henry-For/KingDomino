@@ -30,4 +30,14 @@ public class Casillero {
 	public void setPosicion(Posicion posicion) {
 		this.posicion = posicion;
 	}
+
+	public int getCantCoronas() {
+		return this.cantCoronas;
+	}
+	
+	public String getTipoTerreno()
+	{
+		return this.tipoTerreno;
+	}
+	
 }
