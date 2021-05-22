@@ -23,11 +23,11 @@ public class Ficha implements Comparable<Ficha>{
 	
     @Override
     public String toString() {
-        return "\nFicha: " + valorFicha + ("\n---------------------------------")
-                + ("\n|" + casilleros[0].getCantCoronas() + "\t\t|" + casilleros[1].getCantCoronas() + "\t\t|")
-                + ("\n|" + casilleros[0].getTipoTerreno() + "\t\t|" + casilleros[0].getTipoTerreno() + "\t\t|")
-                + ("\n|" + casilleros[0].getPosicion() + "\t\t|" + casilleros[1].getPosicion() + "\t\t|")
-                + ("\n---------------------------------");
+        return "\nFicha: " + valorFicha + ("\n------------------------------------------------- ")
+                + ("\n|" + casilleros[0].getCantCoronas() + "\t\t\t|" + casilleros[1].getCantCoronas() + "\t\t\t|")
+                + ("\n|" + casilleros[0].getTipoTerreno() + "\t\t\t|" + casilleros[0].getTipoTerreno() + "\t\t\t|")
+                + ("\n|" + casilleros[0].getPosicion() + "\t\t\t|" + casilleros[1].getPosicion() + "\t\t\t|")
+                + ("\n-------------------------------------------------");
     }
 	
 	public Casillero[] getCasilleros() {
