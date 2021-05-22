@@ -45,9 +45,103 @@ public class ContarPuntosTest {
 				new Casillero("trigo",0,new Posicion(4,5))
 				}
 		};
+		
 		Tablero t= new Tablero(tablero);
 		System.out.println(t.calcularPuntaje());
 		
 	}
+	@Test
+	public void casoNormal2() {
+		Casillero[][] tablero = {
+				{
+				new Casillero("trigo",0,new Posicion(0,0)),
+				new Casillero("trigo",0,new Posicion(0,1)),
+				new Casillero("trigo",0,new Posicion(0,2)),
+				new Casillero("trigo",1,new Posicion(0,3)),
+				new Casillero("pasto",0,new Posicion(0,4))
+				},
+				
+				{
+				new Casillero("trigo",0,new Posicion(1,0)),
+				new Casillero("pasto",0,new Posicion(1,1)),
+				new Casillero("agua",2,new Posicion(1,2)),
+				new Casillero("agua",0,new Posicion(1,3)),
+				new Casillero("agua",0,new Posicion(1,4)),
+				},
+				
+				{
+				new Casillero("agua",0,new Posicion(2,0)),
+				new Casillero("pasto",0,new Posicion(2,1)),
+				new Casillero("rey",0,new Posicion(2,2)),
+				new Casillero("agua",0,new Posicion(2,3)),
+				new Casillero("mina",2,new Posicion(2,4))
+				},
+				{
+				new Casillero("agua",3,new Posicion(3,0)),
+				new Casillero("agua",0,new Posicion(3,1)),
+				new Casillero("trigo",0,new Posicion(3,2)),
+				new Casillero("bosque",0,new Posicion(3,3)),
+				new Casillero("mina",0,new Posicion(3,4))
+				},
+				{
+				new Casillero("pasto",0,new Posicion(4,0)),
+				null,
+				new Casillero("trigo",0,new Posicion(4,1)),
+				new Casillero("bosque",0,new Posicion(4,2)),
+				new Casillero("trigo",0,new Posicion(4,3))
+				}
+		};
+		Tablero t= new Tablero(tablero);
+		System.out.println(t.calcularPuntaje());
 
+}
+    @Test
+    public void caso2()
+    {
+        Casillero[][] tablero = {
+                {
+                new Casillero("agua",1,new Posicion(0,0)),
+                new Casillero("bosque",0,new Posicion(0,1)),
+                new Casillero("agua",0,new Posicion(0,2)),
+                new Casillero("trigo",1,new Posicion(0,3)),
+                new Casillero("trigo",0,new Posicion(0,4))
+                },
+
+                {
+                new Casillero("bosque",0,new Posicion(1,0)),
+                new Casillero("bosque",1,new Posicion(1,1)),
+                new Casillero("agua",0,new Posicion(1,2)),
+                new Casillero("trigo",0,new Posicion(1,3)),
+                new Casillero("pasto",0,new Posicion(1,4))
+                },
+
+                {
+                new Casillero("bosque",0,new Posicion(2,0)),
+                new Casillero("bosque",1,new Posicion(2,1)),
+                new Casillero("rey",0,new Posicion(2,2)),
+                new Casillero("trigo",0,new Posicion(2,3)),
+                new Casillero("bosque",0,new Posicion(2,4))
+                },
+                {
+                new Casillero("trigo",0,new Posicion(3,0)),
+                new Casillero("trigo",0,new Posicion(3,1)),
+                new Casillero("trigo",0,new Posicion(3,2)),
+                new Casillero("trigo",0,new Posicion(3,3)),
+                new Casillero("trigo",0,new Posicion(3,4))
+                },
+                {
+                new Casillero("trigo",0,new Posicion(4,0)),
+                new Casillero("trigo",1,new Posicion(4,1)),
+                new Casillero("trigo",0,new Posicion(4,2)),
+                new Casillero("mina",2,new Posicion(4,3)),
+                new Casillero("tierra",0,new Posicion(4,4))
+                }
+                
+        };
+        Tablero t = new Tablero(tablero);
+        System.out.println(t.calcularPuntaje());
+        
+        assertEquals(37,t.calcularPuntaje());    
+        
+    }
 }
