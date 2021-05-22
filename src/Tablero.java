@@ -67,6 +67,7 @@ public class Tablero {
 						break;
 					case "tierra":
 						matrizDePuntos[i][j] = TipoTerreno.tierra;//6
+						break;
 					default:
 						matrizDePuntos[i][j] = 0;
 					}
