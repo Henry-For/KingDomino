@@ -1,21 +1,8 @@
 public class Tablero {
 
 	private Casillero[][] tablero = new Casillero[5][5];
- int [][] m = new int [5][5];
-	private int[][] trigo = new int[5][5];
-	private int[][] agua = new int[5][5];
-	private int[][] mina = new int[5][5];
-	private int[][] pasto = new int[5][5];
-	private static int cantCoronas=0; // aux;
-
-	public Tablero()
-	{
-		Casillero rey = new Casillero("rey",0,new Posicion(2,2));
-	}
-	
-	public int calcularPuntaje() {
-		return 1;
-	}
+	private int[][] matrizDePuntos = new int[5][5];
+	private static int auxCoronas = 0; // aux;
 
 	public boolean posicionarFicha(Ficha f, Posicion posCasillero1, Posicion posCasillero2) {
 		if (tablero[posCasillero1.getX()][posCasillero1.getY()] == null
@@ -26,77 +13,85 @@ public class Tablero {
 			tablero[posCasillero2.getX()][posCasillero2.getY()] = f.getCasilleros()[1];
 			return true;
 		}
-		
-		System.out.println("Posicion(es) ocupada(s)");
 		return false;
 	}
-	public void generarMatrizTrigo() {
-		for(int i=0; i<5;i++) {
-			for(int j=0;j<5;j++) {
-				tablero[i][j]= new Casillero("agua",0,new Posicion(0,1));
-			}
-		}
-		tablero[0][1]= new Casillero("trigo",0,new Posicion(0,1));
-		tablero[0][3]= new Casillero("trigo",0,new Posicion(0,3));
-		tablero[0][4]= new Casillero("trigo",0,new Posicion(0,1));
-		tablero[2][1]= new Casillero("trigo",0,new Posicion(0,1));
-		tablero[3][1]= new Casillero("trigo",0,new Posicion(0,1));
-		tablero[4][0]= new Casillero("trigo",0,new Posicion(0,1));
-		tablero[4][1]= new Casillero("trigo",0,new Posicion(0,1));
-		tablero[4][2]= new Casillero("trigo",0,new Posicion(0,1));
-		tablero[3][3]= new Casillero("trigo",1,new Posicion(0,1));
-		tablero[3][4]= new Casillero("trigo",0,new Posicion(0,1));
-		tablero[4][3]= new Casillero("trigo",1,new Posicion(0,1));
-		tablero[4][4]= new Casillero("trigo",0,new Posicion(0,1));
-		
-		for(int i=0; i<5; i++) {
-			for(int j=0;j<5;j++) {
-				if(tablero[i][j].getTipoTerreno()=="trigo") {
-					trigo[i][j]=1;
-				}
-			}
-		}
 
-		
+	Tablero(Casillero[][] tablero) {
+		this.tablero = tablero;
 	}
-	public int contarPuntosTrigo1() {
-		int puntos=0;
-		generarMatrizTrigo();
-		for(int i=0;i<5;i++) {
-			for(int j=0; j<5; j++) {
-				cantCoronas=0;
-				if(trigo[i][j]==1) {
-//					int fichas=contarPuntosTrigo(i,j);
-//					System.out.print(cantCoronas + " ");
-//					System.out.println(fichas);
-					puntos+= contarPuntosTrigo(i,j) * cantCoronas;
+
+	public void generarMatrizDePuntos() {
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				if (tablero[i][j] != null) {
+					switch (tablero[i][j].getTipoTerreno()) {
+					case "trigo":
+						matrizDePuntos[i][j] = TipoTerreno.trigo;// 1
+						break;
+					case "agua":
+						matrizDePuntos[i][j] = TipoTerreno.agua;// 2
+						break;
+					case "mina":
+						matrizDePuntos[i][j] = TipoTerreno.mina;// 3
+						break;
+					case "pasto":
+						matrizDePuntos[i][j] = TipoTerreno.pasto;// 4
+						break;
+					case "bosque":
+						matrizDePuntos[i][j] = TipoTerreno.bosque;// 5
+						break;
+					default:
+						matrizDePuntos[i][j] = 0;
+					}
 				}
+
 			}
 		}
-		return puntos;
 	}
-	public int contarPuntosTrigo(int i, int j) {
-			if(i>=5 || i<0 || j>=5 || j<0 || trigo[i][j]!=1) {
-				return 0;
+
+	public int calcularPuntaje() {
+		generarMatrizDePuntos();
+		int puntosTrigo = 0;// 1
+		int puntosAgua = 0; // 2
+		int puntosMina = 0;// 3
+		int puntosPasto = 0;// 4
+		int puntosBosque = 0;// 5
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				switch (matrizDePuntos[i][j]) {
+				case 1:
+					puntosTrigo += contarPuntosR(i, j, 1) * auxCoronas;
+					break;
+				case 2:
+					puntosAgua += contarPuntosR(i, j, 2) * auxCoronas;
+					break;
+				case 3:
+					puntosMina += contarPuntosR(i, j, 3) * auxCoronas;
+					break;
+				case 4:
+					puntosPasto += contarPuntosR(i, j, 4) * auxCoronas;
+					break;
+				case 5:
+					puntosBosque += contarPuntosR(i, j, 5) * auxCoronas;
+					break;
+				}
+				auxCoronas = 0;
 			}
-			trigo[i][j]=0;
-			cantCoronas+=tablero[i][j].getCantCoronas();
-			return  (1 + contarPuntosTrigo(i,j+1) + 
-					contarPuntosTrigo(i,j-1)+
-					contarPuntosTrigo(i-1,j)+
-					contarPuntosTrigo(i+1,j));
+		}
+		return puntosTrigo + puntosAgua + puntosMina + puntosPasto + puntosBosque;
 	}
+
+	public int contarPuntosR(int i, int j, int t) {
+		if (i >= 5 || i < 0 || j >= 5 || j < 0 || matrizDePuntos[i][j] != t) {
+			return 0;
+		}
+		matrizDePuntos[i][j] = 0;
+		auxCoronas += tablero[i][j].getCantCoronas();
+		return (1 + contarPuntosR(i, j + 1, t) + contarPuntosR(i, j - 1, t) + contarPuntosR(i - 1, j, t)
+				+ contarPuntosR(i + 1, j, t));
+	}
+
 	public static void main(String[] args) {
-		Tablero t = new Tablero();
-		t.generarMatrizTrigo();
-//		System.out.println(t.tablero[2][3].getTipoTerreno());
-//		System.out.println(t.tablero[0][1].getTipoTerreno());
-//		for(int i=0;i<5;i++) {
-//			for(int j=0;j<5;j++) {
-//				System.out.print(t.trigo[i][j]+ "|");
-//			}
-//			System.out.println();
-//		}
-		System.out.println(t.contarPuntosTrigo1());
 	}
+
 }
