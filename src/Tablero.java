@@ -2,7 +2,7 @@ public class Tablero {
 
 	private Casillero[][] tablero = new Casillero[5][5];
 	private int[][] matrizDePuntos = new int[5][5];
-	private static int auxCoronas = 0; // aux;
+	private int auxCoronas = 0; // aux;
 
 	public boolean posicionarFicha(Ficha f, Posicion posCasillero1, Posicion posCasillero2) {
 		if (tablero[posCasillero1.getX()][posCasillero1.getY()] == null
@@ -40,6 +40,8 @@ public class Tablero {
 					case "bosque":
 						matrizDePuntos[i][j] = TipoTerreno.bosque;// 5
 						break;
+					case "tierra":
+						matrizDePuntos[i][j] = TipoTerreno.tierra;//6
 					default:
 						matrizDePuntos[i][j] = 0;
 					}
@@ -56,29 +58,33 @@ public class Tablero {
 		int puntosMina = 0;// 3
 		int puntosPasto = 0;// 4
 		int puntosBosque = 0;// 5
+		int puntosTierra = 0;//6
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				switch (matrizDePuntos[i][j]) {
-				case 1:
-					puntosTrigo += contarPuntosR(i, j, 1) * auxCoronas;
+				case TipoTerreno.trigo:
+					puntosTrigo += contarPuntosR(i, j, TipoTerreno.trigo) * auxCoronas;
 					break;
-				case 2:
-					puntosAgua += contarPuntosR(i, j, 2) * auxCoronas;
+				case TipoTerreno.agua:
+					puntosAgua += contarPuntosR(i, j, TipoTerreno.agua) * auxCoronas;
 					break;
-				case 3:
-					puntosMina += contarPuntosR(i, j, 3) * auxCoronas;
+				case TipoTerreno.mina:
+					puntosMina += contarPuntosR(i, j, TipoTerreno.mina) * auxCoronas;
 					break;
-				case 4:
-					puntosPasto += contarPuntosR(i, j, 4) * auxCoronas;
+				case TipoTerreno.pasto:
+					puntosPasto += contarPuntosR(i, j, TipoTerreno.pasto) * auxCoronas;
 					break;
-				case 5:
-					puntosBosque += contarPuntosR(i, j, 5) * auxCoronas;
+				case TipoTerreno.bosque:
+					puntosBosque += contarPuntosR(i, j, TipoTerreno.pasto) * auxCoronas;
+					break;
+				case TipoTerreno.tierra:
+					puntosTierra += contarPuntosR(i, j, TipoTerreno.tierra) * auxCoronas;
 					break;
 				}
 				auxCoronas = 0;
 			}
 		}
-		return puntosTrigo + puntosAgua + puntosMina + puntosPasto + puntosBosque;
+		return puntosTrigo + puntosAgua + puntosMina + puntosPasto + puntosBosque + puntosTierra;
 	}
 
 	public int contarPuntosR(int i, int j, int t) {

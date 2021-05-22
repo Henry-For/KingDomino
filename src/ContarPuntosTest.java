@@ -25,7 +25,7 @@ public class ContarPuntosTest {
 				
 				{
 				new Casillero("bosque",0,new Posicion(2,0)),
-				null,
+				new Casillero("trigo",0,new Posicion(2,1)),
 				new Casillero("pasto",1,new Posicion(2,2)),
 				new Casillero("pasto",0,new Posicion(2,3)),
 				new Casillero("pasto",2,new Posicion(2,4))
