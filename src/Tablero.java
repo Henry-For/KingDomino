@@ -8,6 +8,11 @@ public class Tablero {
 	private int[][] pasto = new int[5][5];
 	private static int cantCoronas=0; // aux;
 
+	public Tablero()
+	{
+		Casillero rey = new Casillero("rey",0,new Posicion(2,2));
+	}
+	
 	public int calcularPuntaje() {
 		return 1;
 	}
@@ -21,6 +26,8 @@ public class Tablero {
 			tablero[posCasillero2.getX()][posCasillero2.getY()] = f.getCasilleros()[1];
 			return true;
 		}
+		
+		System.out.println("Posicion(es) ocupada(s)");
 		return false;
 	}
 	public void generarMatrizTrigo() {

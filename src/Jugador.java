@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Jugador {
 	
@@ -10,26 +13,48 @@ public class Jugador {
 	private String nickName;
 	private int puntaje;
 	private Tablero tablero;
+	private Scanner tec;
 	
 	public Jugador(String nickName) {
 		this.nickName = nickName;
 		cantidadJugadores++;
 		id = cantidadJugadores;
 		tablero = new Tablero();
+		this.tec = new Scanner(System.in);
 	}
 	
 	public Ficha seleccionarFicha(PilaDeRobo pr) {
-		pr.mostrarFichas();
-		// leer valor de consola y esa es la ficha. 
-		return null; 
+		//pr.mostrarFichas();
+		
+		System.out.print(this.nickName + " seleccione ficha: ");
+		//String input = tec.nextLine();
+		//int number = Integer.parseInt( input );
+		int opcion = tec.nextInt();
+		System.out.println(opcion);
+		
+		List<Ficha> fichas = new ArrayList<Ficha>(pr.getFichasRonda().keySet());
+		
+		return fichas.get(opcion-1);
 	}
 
 	public boolean elegirPosicionFicha(Ficha f) {
-		//Este metodo le pide a la interfaz que devuelva la posicion.
-		//Hardcodeamos posicion para testear.
-		Posicion posCasillero1 = new Posicion(0,0);
-		Posicion posCasillero2 = new Posicion(0,0);
-		return tablero.posicionarFicha(f, posCasillero1, posCasillero2); // Si devuelve falso la interfaz deberia marcar en rojo.
+		Posicion 	posCasillero1 = new Posicion(),
+					posCasillero2 = new Posicion();
+		do
+		{
+			System.out.println(this.nickName + " inserte la posicion de la ficha:");
+			int x = tec.nextInt();
+			int y = tec.nextInt();
+			int x1 = tec.nextInt();
+			int y1 = tec.nextInt();			
+			posCasillero1.setX(x);
+			posCasillero1.setY(y);
+			posCasillero2.setX(x1);
+			posCasillero2.setY(y1);
+			
+		}while(tablero.posicionarFicha(f, posCasillero1, posCasillero2) == false);
+		
+		return true; // Si devuelve falso la interfaz deberia marcar en rojo.
 	}
 	
 	public void obtenerPuntaje() {
@@ -40,5 +65,9 @@ public class Jugador {
 	}
 	
 	public static void ordenarJugadoresPuntaje(ArrayList<Jugador> jugadores) {
+	}
+
+	public String getNickName() {
+		return this.nickName;
 	}
 }
