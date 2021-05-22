@@ -59,7 +59,7 @@ public class Game {
 				System.out.println("\n===================================================");
 				if(jugador.elegirPosicionFicha(set.getKey()))
 				{
-					System.out.println(jugador.getNickName() + "ficha insertada");
+					System.out.println(jugador.getNickName() + " ficha " + set.getKey() + "\ninsertada" );
 				}
 				else
 				{
@@ -71,7 +71,7 @@ public class Game {
 					fichaElegida = jugador.seleccionarFicha(pilaDeRoboSiguiente);					
 				}while(pilaDeRoboSiguiente.asignarFicha(fichaElegida, jugador) == false);
 				
-				//System.out.println(fichaElegida);
+				//System.out.println("Tu ficha asignada es: " + fichaElegida);
 			}
 		}
 	}

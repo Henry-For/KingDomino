@@ -24,9 +24,9 @@ public class Ficha implements Comparable<Ficha>{
     @Override
     public String toString() {
         return "\nFicha: " + valorFicha + ("\n------------------------------------------------- ")
-                + ("\n|" + casilleros[0].getCantCoronas() + "\t\t\t|" + casilleros[1].getCantCoronas() + "\t\t\t|")
-                + ("\n|" + casilleros[0].getTipoTerreno() + "\t\t\t|" + casilleros[0].getTipoTerreno() + "\t\t\t|")
-                + ("\n|" + casilleros[0].getPosicion() + "\t\t\t|" + casilleros[1].getPosicion() + "\t\t\t|")
+                + ("\n|" + String.format("%-23s|",casilleros[0].getCantCoronas()) + String.format("%23s|",casilleros[1].getCantCoronas()))
+                + ("\n|" + String.format("%-23s|",casilleros[0].getTipoTerreno()) + String.format("%23s|",casilleros[0].getTipoTerreno()))
+                + ("\n|" + String.format("%-23s|",casilleros[0].getPosicion()) + String.format("%23s|",casilleros[1].getPosicion() ))
                 + ("\n-------------------------------------------------");
     }
 	
