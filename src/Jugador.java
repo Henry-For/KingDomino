@@ -2,35 +2,33 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Jugador {
+public class Jugador implements Comparable<Jugador>{
 	
 	private int id;
 	private static int cantidadJugadores= 0;
 	private String nickName;
 	private int puntaje;
 	private Tablero tablero;
-	private Scanner tec;
+	private static Scanner tec;
 	
 	public Jugador(String nickName) {
 		this.nickName = nickName;
 		cantidadJugadores++;
-		id = cantidadJugadores;
-		//tablero = new Tablero();
-		this.tec = new Scanner(System.in);
+		this.id = cantidadJugadores;
+		this.tablero = new Tablero();
+		tec = new Scanner(System.in);
 	}
 	
 	public Ficha seleccionarFicha(PilaDeRobo pr) {
-		//pr.mostrarFichas();
+		pr.mostrarFichas();
 		
 		System.out.print(this.nickName + " seleccione ficha: ");
-		//String input = tec.nextLine();
-		//int number = Integer.parseInt( input );
 		int opcion = tec.nextInt();
-		System.out.println(opcion);
 		
 		List<Ficha> fichas = new ArrayList<Ficha>(pr.getFichasRonda().keySet());
 		
@@ -40,8 +38,7 @@ public class Jugador {
 	public boolean elegirPosicionFicha(Ficha f) {
 		Posicion 	posCasillero1 = new Posicion(),
 					posCasillero2 = new Posicion();
-		do
-		{
+		do{
 			System.out.println(this.nickName + " inserte la posicion de la ficha:");
 			int x = tec.nextInt();
 			int y = tec.nextInt();
@@ -57,7 +54,14 @@ public class Jugador {
 		return true; // Si devuelve falso la interfaz deberia marcar en rojo.
 	}
 	
-	public void obtenerPuntaje() {
+	private void obtenerPuntaje() {
+		
+		this.puntaje = this.tablero.calcularPuntaje();
+	}
+	
+	public int getPuntaje() {
+		this.obtenerPuntaje();
+		return this.puntaje;
 	}
 
 	public static void mezclarJugadores(ArrayList<Jugador> jugadores) {
@@ -65,9 +69,30 @@ public class Jugador {
 	}
 	
 	public static void ordenarJugadoresPuntaje(ArrayList<Jugador> jugadores) {
+		Collections.sort(jugadores);
 	}
 
 	public String getNickName() {
 		return this.nickName;
 	}
+
+	@Override
+	public int compareTo(Jugador j2) {
+		return this.puntaje - j2.puntaje;
+	}
+	
+	public static void mostrarJugadores(ArrayList<Jugador> jugadores)
+	{
+		for (Jugador jugador : jugadores) {
+			System.out.println(jugador);
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "Jugador [ "+"nickName=" + nickName + ", puntaje=" + puntaje + "]";
+	}
+	
+	
+	
 }

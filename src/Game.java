@@ -27,6 +27,7 @@ public class Game {
 			this.pilaDeRoboActual= this.pilaDeRoboSiguiente;
 		}
 		this.obtenerGanadores();
+		Jugador.mostrarJugadores(jugadores);
 	}
 	
 	// Se encarga de asignar los primeros turnos de manera aleatoria. 
@@ -55,9 +56,10 @@ public class Game {
 		for (Entry<Ficha, Jugador> set : pilaDeRoboActual.getFichasRonda().entrySet()) {
 			Jugador jugador = set.getValue();
 			if(jugador != null) {
+				System.out.println("\n===================================================");
 				if(jugador.elegirPosicionFicha(set.getKey()))
 				{
-					System.out.println(jugador.getNickName() + " ficha insertada");
+					System.out.println(jugador.getNickName() + "ficha insertada");
 				}
 				else
 				{
