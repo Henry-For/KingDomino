@@ -2,7 +2,7 @@ public class Tablero {
 
 	private Casillero[][] tablero = new Casillero[5][5];
 	private int[][] matrizDePuntos = new int[5][5];
-	private static int auxCoronas = 0; // aux;
+	private int auxCoronas = 0; // aux;
 
 	public boolean posicionarFicha(Ficha f, Posicion posCasillero1, Posicion posCasillero2) {
 		if (tablero[posCasillero1.getX()][posCasillero1.getY()] == null
