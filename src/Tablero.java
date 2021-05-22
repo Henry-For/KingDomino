@@ -1,17 +1,15 @@
 public class Tablero {
 
 	private Casillero[][] tablero = new Casillero[5][5];
-	private int[] trigo = new int[2];
-	private int[] agua = new int[2];
-	private int[] mina = new int[2];
-	private int[] pasto = new int[2];
+	private int[][] matrizDePuntos = new int[5][5];
+	private int auxCoronas = 0; // aux;
 
 	public Tablero() {
 		tablero[2][2] = new Casillero(Casillero.TERRENO_REY, 0, new Posicion(2, 2));
 	}
-
-	public int calcularPuntaje() {
-		return 1;
+	
+	Tablero(Casillero[][] tablero) {
+		this.tablero = tablero;
 	}
 
 	public boolean posicionarFicha(Ficha f, Posicion posCasillero1, Posicion posCasillero2) {
@@ -46,4 +44,82 @@ public class Tablero {
 			return true;
 		return false;
 	}
+
+	public void generarMatrizDePuntos() {
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				if (tablero[i][j] != null) {
+					switch (tablero[i][j].getTipoTerreno()) {
+					case "trigo":
+						matrizDePuntos[i][j] = TipoTerreno.trigo;// 1
+						break;
+					case "agua":
+						matrizDePuntos[i][j] = TipoTerreno.agua;// 2
+						break;
+					case "mina":
+						matrizDePuntos[i][j] = TipoTerreno.mina;// 3
+						break;
+					case "pasto":
+						matrizDePuntos[i][j] = TipoTerreno.pasto;// 4
+						break;
+					case "bosque":
+						matrizDePuntos[i][j] = TipoTerreno.bosque;// 5
+						break;
+					case "tierra":
+						matrizDePuntos[i][j] = TipoTerreno.tierra;//6
+					default:
+						matrizDePuntos[i][j] = 0;
+					}
+				}
+
+			}
+		}
+	}
+
+	public int calcularPuntaje() {
+		generarMatrizDePuntos();
+		int puntosTrigo = 0;// 1
+		int puntosAgua = 0; // 2
+		int puntosMina = 0;// 3
+		int puntosPasto = 0;// 4
+		int puntosBosque = 0;// 5
+		int puntosTierra = 0;//6
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				switch (matrizDePuntos[i][j]) {
+				case TipoTerreno.trigo:
+					puntosTrigo += contarPuntosR(i, j, TipoTerreno.trigo) * auxCoronas;
+					break;
+				case TipoTerreno.agua:
+					puntosAgua += contarPuntosR(i, j, TipoTerreno.agua) * auxCoronas;
+					break;
+				case TipoTerreno.mina:
+					puntosMina += contarPuntosR(i, j, TipoTerreno.mina) * auxCoronas;
+					break;
+				case TipoTerreno.pasto:
+					puntosPasto += contarPuntosR(i, j, TipoTerreno.pasto) * auxCoronas;
+					break;
+				case TipoTerreno.bosque:
+					puntosBosque += contarPuntosR(i, j, TipoTerreno.pasto) * auxCoronas;
+					break;
+				case TipoTerreno.tierra:
+					puntosTierra += contarPuntosR(i, j, TipoTerreno.tierra) * auxCoronas;
+					break;
+				}
+				auxCoronas = 0;
+			}
+		}
+		return puntosTrigo + puntosAgua + puntosMina + puntosPasto + puntosBosque + puntosTierra;
+	}
+
+	public int contarPuntosR(int i, int j, int t) {
+		if (i >= 5 || i < 0 || j >= 5 || j < 0 || matrizDePuntos[i][j] != t) {
+			return 0;
+		}
+		matrizDePuntos[i][j] = 0;
+		auxCoronas += tablero[i][j].getCantCoronas();
+		return (1 + contarPuntosR(i, j + 1, t) + contarPuntosR(i, j - 1, t) + contarPuntosR(i - 1, j, t)
+				+ contarPuntosR(i + 1, j, t));
+	}
+
 }

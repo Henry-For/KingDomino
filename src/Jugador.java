@@ -19,7 +19,7 @@ public class Jugador {
 		this.nickName = nickName;
 		cantidadJugadores++;
 		id = cantidadJugadores;
-		tablero = new Tablero();
+		//tablero = new Tablero();
 		this.tec = new Scanner(System.in);
 	}
 	
