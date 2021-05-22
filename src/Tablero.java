@@ -100,7 +100,7 @@ public class Tablero {
 					puntosPasto += contarPuntosR(i, j, TipoTerreno.pasto) * auxCoronas;
 					break;
 				case TipoTerreno.bosque:
-					puntosBosque += contarPuntosR(i, j, TipoTerreno.pasto) * auxCoronas;
+					puntosBosque += contarPuntosR(i, j, TipoTerreno.bosque) * auxCoronas;
 					break;
 				case TipoTerreno.tierra:
 					puntosTierra += contarPuntosR(i, j, TipoTerreno.tierra) * auxCoronas;
