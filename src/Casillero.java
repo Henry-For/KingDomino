@@ -1,5 +1,7 @@
 public class Casillero {
 	
+	public static final String TERRENO_REY = "rey";
+	
 	private String tipoTerreno;
 	private int cantCoronas;
 	private Posicion posicion;
@@ -16,6 +18,10 @@ public class Casillero {
 
 	public boolean sonConsecutivos(Casillero c) {
 		return true;
+	}
+	
+	public boolean sonTerrenosConsecutivos(Casillero c) {
+		return tipoTerreno.equals(c.tipoTerreno) || c.tipoTerreno.equals(TERRENO_REY);
 	}
 	
 	@Override
